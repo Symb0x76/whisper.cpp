@@ -46,11 +46,24 @@ if(MSVC)
     add_compile_options("$<$<COMPILE_LANGUAGE:CXX>:/utf-8>")
 else()
     execute_process(
-        COMMAND sh -c "$@ --version | head -1" _ ${CMAKE_C_COMPILER}
-        OUTPUT_VARIABLE OUT
+        COMMAND ${CMAKE_C_COMPILER} --version
+        OUTPUT_VARIABLE OUT_STD
+        ERROR_VARIABLE OUT_ERR
         OUTPUT_STRIP_TRAILING_WHITESPACE
+        ERROR_STRIP_TRAILING_WHITESPACE
     )
-    set(BUILD_COMPILER ${OUT})
+    set(OUT "${OUT_STD}")
+    if (OUT_ERR)
+        if (OUT)
+            string(APPEND OUT "\n" "${OUT_ERR}")
+        else()
+            set(OUT "${OUT_ERR}")
+        endif()
+    endif()
+    if (OUT)
+        string(REGEX MATCH "^[^\r\n]*" OUT_FIRST "${OUT}")
+        set(BUILD_COMPILER ${OUT_FIRST})
+    endif()
     execute_process(
         COMMAND ${CMAKE_C_COMPILER} -dumpmachine
         OUTPUT_VARIABLE OUT
