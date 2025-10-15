@@ -11,6 +11,7 @@ import (
 /*
 #cgo LDFLAGS: -lwhisper -lggml -lggml-base -lggml-cpu -lm -lstdc++
 #cgo linux LDFLAGS: -fopenmp
+#cgo windows LDFLAGS: -fopenmp
 #cgo darwin LDFLAGS: -lggml-metal -lggml-blas
 #cgo darwin LDFLAGS: -framework Accelerate -framework Metal -framework Foundation -framework CoreGraphics
 #include <whisper.h>
