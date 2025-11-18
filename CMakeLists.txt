@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.14) # for add_link_options and implicit target directories support.
 project("whisper.cpp" C CXX)
-project("whisper.cpp" VERSION 1.8.1)
+project("whisper.cpp" VERSION 1.8.2)
 include(CheckIncludeFileCXX)
 
 set(SOVERSION 1)

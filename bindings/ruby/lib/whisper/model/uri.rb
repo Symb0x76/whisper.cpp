@@ -94,7 +94,8 @@ module Whisper
       end
 
       def show_progress(current, size)
-        progress_rate_available = size && $stderr.tty? && $stderr.winsize[1] >= line.size
+        line_size = 47
+        progress_rate_available = size && $stderr.tty? && $stderr.winsize[1] >= line_size
 
         unless @prev
           @prev = Time.now
@@ -205,6 +206,7 @@ module Whisper
 
     %w[
       silero-v5.1.2
+      silero-v6.2.0
     ].each do |name|
       @pre_converted_models[name] = URI.new("https://huggingface.co/ggml-org/whisper-vad/resolve/main/ggml-#{name}.bin")
     end
